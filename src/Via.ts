@@ -8,6 +8,8 @@ import {
   IGetAllowanceStatus,
   IBuildApprovalTx,
   IBuildTx,
+  IAllowance,
+  IApprovalTx,
 } from "./types";
 
 class Via {
@@ -33,7 +35,7 @@ class Via {
     }
   }
 
-  async getAllowanceStatus(params: IGetAllowanceStatus): Promise<IRoute> {
+  async getAllowanceStatus(params: IGetAllowanceStatus): Promise<IAllowance> {
     try {
       const res = await this.httpCli.get("/api/v1/approval/check-allowance", {
         params,
@@ -48,7 +50,7 @@ class Via {
     }
   }
 
-  async buildApprovalTx(params: IBuildApprovalTx): Promise<IRoute> {
+  async buildApprovalTx(params: IBuildApprovalTx): Promise<IApprovalTx> {
     try {
       const res = await this.httpCli.get("/api/v1/approval/build-tx", {
         params,
@@ -63,7 +65,7 @@ class Via {
     }
   }
 
-  async buildTx(params: IBuildTx): Promise<IRoute> {
+  async buildTx(params: IBuildTx): Promise<IBuildTx> {
     try {
       const res = await this.httpCli.get("/api/v1/send/build-tx", { params });
       return res.data;

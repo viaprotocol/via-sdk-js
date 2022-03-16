@@ -105,6 +105,23 @@ export interface IRoute {
   };
 }
 
+export interface IAllowance {
+  value: string
+  tokenAddress: string
+}
+
+export interface IApprovalTx {
+  from: string
+  data: string
+  to: string
+}
+
+export interface IBuildTx {
+  to: string
+  data: string
+  value: string
+}
+
 export interface ISendBridgeInfo {
   route: IRoute;
   fromAddress: string;
