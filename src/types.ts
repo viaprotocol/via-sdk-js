@@ -1,4 +1,5 @@
 export interface ViaConfig {
+  apiKey: string;
   url?: string;
   timeout?: number;
 }

@@ -14,17 +14,19 @@ import {
 
 class Via {
   httpCli: AxiosInstance;
+  apiKey: string;
 
-  constructor(config?: ViaConfig) {
+  constructor(config: ViaConfig) {
     this.httpCli = axios.create({
-      baseURL: config?.url || "https://router-api.via.exchange",
-      timeout: config?.timeout || 30 * 1000,
+      baseURL: config.url || "https://router-api.via.exchange",
+      timeout: config.timeout || 30 * 1000,
     });
+    this.apiKey = config.apiKey;
   }
 
   async getRoutes(params: IGetRoutesRequestParams): Promise<IRoute> {
     try {
-      const res = await this.httpCli.get("/api/v1/routes", { params });
+      const res = await this.httpCli.get("/api/v1/routes", { params: {apiKey: this.apiKey, ...params} });
       return res.data;
     } catch (e) {
       if (axios.isAxiosError(e)) {
@@ -37,9 +39,7 @@ class Via {
 
   async getAllowanceStatus(params: IGetAllowanceStatus): Promise<IAllowance> {
     try {
-      const res = await this.httpCli.get("/api/v1/approval/check-allowance", {
-        params,
-      });
+      const res = await this.httpCli.get("/api/v1/approval/check-allowance", { params: {apiKey: this.apiKey, ...params} });
       return res.data;
     } catch (e) {
       if (axios.isAxiosError(e)) {
@@ -52,9 +52,7 @@ class Via {
 
   async buildApprovalTx(params: IBuildApprovalTx): Promise<IApprovalTx> {
     try {
-      const res = await this.httpCli.get("/api/v1/approval/build-tx", {
-        params,
-      });
+      const res = await this.httpCli.get("/api/v1/approval/build-tx", { params: {apiKey: this.apiKey, ...params} });
       return res.data;
     } catch (e) {
       if (axios.isAxiosError(e)) {
@@ -67,7 +65,7 @@ class Via {
 
   async buildTx(params: IBuildTx): Promise<IBuildTx> {
     try {
-      const res = await this.httpCli.get("/api/v1/send/build-tx", { params });
+      const res = await this.httpCli.get("/api/v1/send/build-tx", { params: {apiKey: this.apiKey, ...params} });
       return res.data;
     } catch (e) {
       if (axios.isAxiosError(e)) {
