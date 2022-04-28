@@ -10,6 +10,7 @@ import {
   IBuildTx,
   IAllowance,
   IApprovalTx,
+  IBuildTxResponse,
 } from "./types";
 
 class Via {
@@ -63,7 +64,7 @@ class Via {
     }
   }
 
-  async buildTx(params: IBuildTx): Promise<IBuildTx> {
+  async buildTx(params: IBuildTx): Promise<IBuildTxResponse> {
     try {
       const res = await this.httpCli.get("/api/v1/send/build-tx", { params: {apiKey: this.apiKey, ...params} });
       return res.data;

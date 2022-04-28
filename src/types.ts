@@ -53,7 +53,7 @@ export interface IBuildApprovalTx {
   amount: number;
 }
 
-export interface IBuildTx extends IRoute {
+export interface IBuildTx {
   routeId: string;
   fromChainId: number;
   fromTokenAddress: string;
@@ -118,7 +118,7 @@ export interface IApprovalTx {
   to: string
 }
 
-export interface IBuildTx {
+export interface IBuildTxResponse {
   to: string
   data: string
   value: string
