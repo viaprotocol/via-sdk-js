@@ -39,8 +39,9 @@ export interface IGetRoutesRequestParams {
 }
 
 export interface IGetAllowanceStatus {
-  fromAddress: string;
-  fromToken: IToken;
+  chainId: number;
+  tokenAddress: string;
+  owner: string;
   routeId: string;
 }
 
