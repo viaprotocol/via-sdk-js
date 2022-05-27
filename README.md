@@ -18,10 +18,10 @@ Our API allows you to find the best route for moving funds between chains!
 First you need to initialize a VIA Client instance:
 
 ``` js
-import Via from "@via/sdk";
+import Via from './Via';
 
-DEFAULT_API_KEY = 'e3db93a3-ae1c-41e5-8229-b8c1ecef5583';
-const cli = Via({apiKey: DEFAULT_API_KEY, endpoint: "https://router-api.via.exchange", timeout: 30});
+const DEFAULT_API_KEY = 'e3db93a3-ae1c-41e5-8229-b8c1ecef5583';
+const cli = new Via({apiKey: DEFAULT_API_KEY, url: 'https://router-api.via.exchange', timeout: 30});
 ```
 
 Get the best routes.
@@ -47,9 +47,10 @@ const routeId = routes.routes[0];
 const chainId = fromChainId;
 const owner = "YOUR_WALLET_ADDRESS";
 const tokenAddress = fromTokenAddress;
+const numAction = 0;  // number of action in routes
 
 const allowanceStatus = await cli.getAllowanceStatus(
-    {routeId, chainId, owner, tokenAddress}
+    {owner, routeId, numAction}
 );
 ```
 
@@ -60,7 +61,7 @@ Returns the transaction that approves the VIA API to spend your token.
 const amount = fromAmount;
 
 tx = await cli.buildApprovalTx(
-    {routeId, chainId, owner, tokenAddress, amount}
+    {routeId, owner, numAction}
 )
 ```
 
@@ -73,14 +74,9 @@ output = routes.routes[0].toTokenAmount
 tx = await cli.buildTx(
     {
         routeId,
-        fromChainId,
-        fromTokenAddress,
-        amount,
-        toChainId,
-        toTokenAddress,
         fromAddress,
         receiveAddress,
-        output
+        numAction
     }
 )
 ```

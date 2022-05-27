@@ -33,37 +33,28 @@ export interface IGetRoutesRequestParams {
   toChainId: number;
   fromTokenAddress: string;
   toTokenAddress: string;
-  fromAmount: string;
+  fromAmount: number;
   fromAddress?: string;
   toAddress?: string;
 }
 
 export interface IGetAllowanceStatus {
-  chainId: number;
-  tokenAddress: string;
   owner: string;
   routeId: string;
+  numAction: number;
 }
 
 export interface IBuildApprovalTx {
   routeId: string;
-  chainId: number;
   owner: string;
-  tokenAddress: string;
-  amount: number;
+  numAction: number;
 }
 
 export interface IBuildTx {
   routeId: string;
-  fromChainId: number;
-  fromTokenAddress: string;
-  toChainId: number;
-  toTokenAddress: string;
   fromAddress: string;
   receiveAddress: string;
-  output: string;
-  amount: number;
-  middleware?: string;
+  numAction: number;
 }
 
 export interface IGetRoutesResponse {
@@ -83,6 +74,22 @@ export interface IRouteStep {
   toTokenAmount: number;
 }
 
+export interface IRouteAction {
+  provider: number;
+  fromToken: IToken;
+  fromTokenAmount: number;
+  toToken: IToken;
+  toTokenAmount: number;
+  steps: IRouteStep[];
+  fee: IFee;
+  contractAddress: string;
+  txHash: string;
+  gasLimit: string;
+  gasUsed: string;
+  gasUsd: number;
+}
+
+
 export interface IRouteStepTool {
   name: string;
   logoURI: string;
@@ -97,14 +104,15 @@ export interface IFee {
 }
 
 export interface IRoute {
-  active: boolean;
-  fee: IFee;
-  steps: IRouteStep[];
   toTokenAmount: number;
-  routeId: string;
+  fee: IFee;
+  actions: IRouteAction[];
   extra: {
     routePath: string | null;
   };
+  active: boolean;
+  routeId: string;
+  slippage: number;
 }
 
 export interface IAllowance {
@@ -121,7 +129,8 @@ export interface IApprovalTx {
 export interface IBuildTxResponse {
   to: string
   data: string
-  value: string
+  value: number
+  gas: number
 }
 
 export interface ISendBridgeInfo {
