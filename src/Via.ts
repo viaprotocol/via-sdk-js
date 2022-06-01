@@ -1,8 +1,7 @@
-import axios, { AxiosInstance } from "axios";
+import axios, { AxiosInstance } from 'axios';
 
-import { ViaError } from "./errors";
+import { ViaError } from './errors';
 import {
-  IRoute,
   ViaConfig,
   IGetRoutesRequestParams,
   IGetAllowanceStatus,
@@ -11,7 +10,8 @@ import {
   IAllowance,
   IApprovalTx,
   IBuildTxResponse,
-} from "./types";
+  IGetRoutesResponse,
+} from './types';
 
 class Via {
   httpCli: AxiosInstance;
@@ -19,15 +19,15 @@ class Via {
 
   constructor(config: ViaConfig) {
     this.httpCli = axios.create({
-      baseURL: config.url || "https://router-api.via.exchange",
+      baseURL: config.url || 'https://router-api.via.exchange',
       timeout: config.timeout || 30 * 1000,
     });
     this.apiKey = config.apiKey;
   }
 
-  async getRoutes(params: IGetRoutesRequestParams): Promise<IRoute> {
+  async getRoutes(params: IGetRoutesRequestParams): Promise<IGetRoutesResponse> {
     try {
-      const res = await this.httpCli.get("/api/v1/routes", { params: {apiKey: this.apiKey, ...params} });
+      const res = await this.httpCli.get('/api/v1/routes', { params: {apiKey: this.apiKey, ...params} });
       return res.data;
     } catch (e) {
       if (axios.isAxiosError(e)) {
@@ -40,7 +40,10 @@ class Via {
 
   async getAllowanceStatus(params: IGetAllowanceStatus): Promise<IAllowance> {
     try {
-      const res = await this.httpCli.get("/api/v1/approval/check-allowance", { params: {apiKey: this.apiKey, ...params} });
+      const res = await this.httpCli.get(
+        '/api/v2/approval/check-allowance',
+        { params: {apiKey: this.apiKey, ...params} }
+      );
       return res.data;
     } catch (e) {
       if (axios.isAxiosError(e)) {
@@ -53,7 +56,7 @@ class Via {
 
   async buildApprovalTx(params: IBuildApprovalTx): Promise<IApprovalTx> {
     try {
-      const res = await this.httpCli.get("/api/v1/approval/build-tx", { params: {apiKey: this.apiKey, ...params} });
+      const res = await this.httpCli.get('/api/v2/approval/build-tx', { params: {apiKey: this.apiKey, ...params} });
       return res.data;
     } catch (e) {
       if (axios.isAxiosError(e)) {
@@ -66,7 +69,7 @@ class Via {
 
   async buildTx(params: IBuildTx): Promise<IBuildTxResponse> {
     try {
-      const res = await this.httpCli.get("/api/v1/send/build-tx", { params: {apiKey: this.apiKey, ...params} });
+      const res = await this.httpCli.get('/api/v2/send/build-tx', { params: {apiKey: this.apiKey, ...params} });
       return res.data;
     } catch (e) {
       if (axios.isAxiosError(e)) {
