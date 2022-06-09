@@ -18,7 +18,7 @@ Our API allows you to find the best route for moving funds between chains!
 First you need to initialize a VIA Client instance:
 
 ``` js
-import Via from '@via/sdk';
+import Via from '@viaprotocol/router-sdk';
 
 const DEFAULT_API_KEY = 'e3db93a3-ae1c-41e5-8229-b8c1ecef5583';
 const cli = new Via({apiKey: DEFAULT_API_KEY, url: 'https://router-api.via.exchange', timeout: 30});
