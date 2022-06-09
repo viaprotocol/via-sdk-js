@@ -28,13 +28,23 @@ Get the best routes.
 
 ``` js
 const fromChainId = 1;
-const fromTokenAddress = "0x0000000000000000000000000000000000000000";
+const fromTokenAddress = '0x0000000000000000000000000000000000000000';
 const fromAmount = Math.pow(10, 18);
 const toChainId = 56;
-const toTokenAddress = "0x0000000000000000000000000000000000000000";
+const toTokenAddress = '0x0000000000000000000000000000000000000000';
+const fromAddress = '0x856cc59aaE47997a1C8D5472Fc8dfef27821235d';  // might be null
+const multiTx = false;  // whether to return routes with multiple user transactions
 
 const routes = await cli.getRoutes(
-    {fromChainId, fromTokenAddress, fromAmount, toChainId, toTokenAddress}
+    {
+        fromChainId,
+        fromTokenAddress,
+        fromAmount,
+        toChainId,
+        toTokenAddress,
+        fromAddress,
+        multiTx
+    }
 );
 ```
 

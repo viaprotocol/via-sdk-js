@@ -22,20 +22,16 @@ export interface IToken {
   color: string;
 }
 
-export interface ITokenState extends IToken {
-  amount: string;
-  price?: number;
-  network?: INetwork;
-}
 
 export interface IGetRoutesRequestParams {
   fromChainId: number;
-  toChainId: number;
   fromTokenAddress: string;
-  toTokenAddress: string;
   fromAmount: number;
-  fromAddress?: string;
-  toAddress?: string;
+  toChainId: number;
+  toTokenAddress: string;
+  fromAddress?: string;  // sender user address
+  toAddress?: string;  // recipient user address
+  multiTx: boolean;
 }
 
 export interface IGetAllowanceStatus {
@@ -64,9 +60,36 @@ export interface IGetRoutesResponse {
   routes: IRoute[];
 }
 
-export interface IRouteStep {
+export interface IFee {
+  feeUsd: null | number;
+  gasFeeUsd: null | number;
+  slippagePerc: null | number;
+  time: null | string;
+  totalLossUsd: null | string;
+}
+
+export interface IActionFeeInfo {
+  gasActionUnits: bigint;
+  gasActionApproveUnits: bigint;
+}
+
+
+export interface IAdditionalProviderFee {
+  amount: bigint;
+  token: IToken;
+}
+
+
+export interface IActionStepTool {
+  name: string;
+  logoURI: string;
+  estimatedTime: number;
+}
+
+
+export interface IActionStep {
   type: string;
-  tool: IRouteStepTool;
+  tool: IActionStepTool;
   fromToken: IToken;
   toToken: IToken;
   fee: IFee;
@@ -75,44 +98,26 @@ export interface IRouteStep {
 }
 
 export interface IRouteAction {
+  uuid: string;
   provider: number;
   fromToken: IToken;
   fromTokenAmount: number;
   toToken: IToken;
   toTokenAmount: number;
-  steps: IRouteStep[];
-  fee: IFee;
-  contractAddress: string;
-  txHash: string;
-  gasLimit: string;
-  gasUsed: string;
-  gasUsd: number;
+  steps: IActionStep[];
+  fee: IActionFeeInfo;
+  additionalProviderFee?: IAdditionalProviderFee;
+  allowanceValue?: string;
 }
 
-
-export interface IRouteStepTool {
-  name: string;
-  logoURI: string;
-  estimatedTime: number;
-}
-
-export interface IFee {
-  feeUsd: null | number;
-  gasFeeUsd: null | number;
-  slippagePerc: null | number;
-  time: null | string;
-}
 
 export interface IRoute {
+  routeId: string;
   toTokenAmount: number;
   fee: IFee;
   actions: IRouteAction[];
-  extra: {
-    routePath: string | null;
-  };
   active: boolean;
-  routeId: string;
-  slippage: number;
+  slippage?: number;
 }
 
 export interface IAllowance {
@@ -131,12 +136,4 @@ export interface IBuildTxResponse {
   data: string
   value: number
   gas: number
-}
-
-export interface ISendBridgeInfo {
-  route: IRoute;
-  fromAddress: string;
-  fromAmount: string;
-  toAddress: string;
-  tx: string;
 }
