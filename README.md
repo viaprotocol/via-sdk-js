@@ -13,6 +13,12 @@ Our API allows you to find the best route for moving funds between chains!
 |build transaction|The transaction that will perform a swap/bridge according to the route|buildTx|
 
 
+### Installing
+```
+npm i @viaprotocol/router-sdk
+```
+
+
 ### Usage
 
 First you need to initialize a VIA Client instance:
