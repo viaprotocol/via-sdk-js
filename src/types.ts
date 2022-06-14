@@ -62,6 +62,7 @@ export interface IGetRoutesResponse {
 
 export interface IFee {
   feeUsd: null | number;
+  gas: null | number;
   gasFeeUsd: null | number;
   slippagePerc: null | number;
   time: null | string;
