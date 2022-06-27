@@ -1,3 +1,3 @@
 import Via from './Via';
 
-export default Via;
+export {Via};
