@@ -79,6 +79,19 @@ class Via {
       }
     }
   }
+
+  async routesPages(): Promise<number> {
+    try {
+      const res = await this.httpCli.get('/api/v1/routes/pages');
+      return res.data.pages;
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        throw new ViaError(e.response?.status, e.response?.data?.message);
+      } else {
+        throw e;
+      }
+    }
+  }
 }
 
 export default Via;
