@@ -33,24 +33,26 @@ const cli = new Via({apiKey: DEFAULT_API_KEY, url: 'https://router-api.via.excha
 Get the best routes.
 
 ``` js
-const fromChainId = 1;
-const fromTokenAddress = '0x0000000000000000000000000000000000000000';
-const fromAmount = Math.pow(10, 18);
-const toChainId = 56;
-const toTokenAddress = '0x0000000000000000000000000000000000000000';
-const fromAddress = '0x856cc59aaE47997a1C8D5472Fc8dfef27821235d';  // might be null
-const multiTx = false;  // whether to return routes with multiple user transactions
+const pagesNum = await cli.routesPages(); // cache me!
+const baseParams = {
+    fromChainId: 1,
+    fromTokenAddress: '0x0000000000000000000000000000000000000000',
+    fromAmount: Math.pow(10, 18),
+    toChainId: 56,
+    toTokenAddress: '0x0000000000000000000000000000000000000000',
+    fromAddress: '0x856cc59aaE47997a1C8D5472Fc8dfef27821235d', // might be null
+    multiTx: false, // whether to return routes with multiple user transactions
+    limit: 1,
+};
+const params = [...Array(pagesNum)].map(
+    (_, i) => ({
+        ...baseParams,
+        offset: i+1
+    })
+);
 
-const routes = await cli.getRoutes(
-    {
-        fromChainId,
-        fromTokenAddress,
-        fromAmount,
-        toChainId,
-        toTokenAddress,
-        fromAddress,
-        multiTx
-    }
+const routes = await Promise.allSettled(
+    params.map(i => cli.getRoutes(i))
 );
 ```
 
@@ -59,7 +61,8 @@ You must approve the contract to spend your token.
 You can get route_id from the route you like received above in the code snippet.
 
 ``` js
-const routeId = routes.routes[0];
+const firstNonEmptyPage = routes.find(i => i.value.routes.length > 0).value;
+const routeId = firstNonEmptyPage.routes[0];
 const chainId = fromChainId;
 const owner = "YOUR_WALLET_ADDRESS";
 const tokenAddress = fromTokenAddress;
@@ -85,7 +88,7 @@ Now you can build the transaction that will perform a crosschain swap according 
 
 ``` js
 # amount out minimal, you can get it from get_routes as to_token_amount
-output = routes.routes[0].toTokenAmount
+output = firstNonEmptyPage.routes[0].toTokenAmount
 
 tx = await cli.buildTx(
     {
