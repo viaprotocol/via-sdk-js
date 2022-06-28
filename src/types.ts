@@ -31,6 +31,8 @@ export interface IGetRoutesRequestParams {
   toTokenAddress: string;
   fromAddress?: string;  // sender user address
   toAddress?: string;  // recipient user address
+  limit?: number;
+  offset?: number;
   multiTx: boolean;
 }
 
