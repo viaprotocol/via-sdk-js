@@ -49,6 +49,7 @@ export interface IBuildApprovalTx {
 }
 
 export interface IBuildTx {
+  owner: string;
   routeId: string;
   fromAddress: string;
   receiveAddress: string;
