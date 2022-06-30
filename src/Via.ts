@@ -11,6 +11,8 @@ import {
   IApprovalTx,
   IBuildTxResponse,
   IGetRoutesResponse,
+  ICheckTxStatusRequest,
+  ITxStatusResponse,
 } from './types';
 
 class Via {
@@ -84,6 +86,19 @@ class Via {
     try {
       const res = await this.httpCli.get('/api/v1/routes/pages');
       return res.data.pages;
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        throw new ViaError(e.response?.status, e.response?.data?.message);
+      } else {
+        throw e;
+      }
+    }
+  }
+
+  async checkTx(params: ICheckTxStatusRequest): Promise<ITxStatusResponse> {
+    try {
+      const res = await this.httpCli.get('/api/v2/tx-status', { params: {apiKey: this.apiKey, ...params} });
+      return res.data;
     } catch (e) {
       if (axios.isAxiosError(e)) {
         throw new ViaError(e.response?.status, e.response?.data?.message);
