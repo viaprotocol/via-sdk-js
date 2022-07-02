@@ -62,7 +62,8 @@ You can get route_id from the route you like received above in the code snippet.
 
 ``` js
 const firstNonEmptyPage = routes.find(i => i.value.routes.length > 0).value;
-const routeId = firstNonEmptyPage.routes[0];
+const route = firstNonEmptyPage.routes[0];
+const routeId = route.routeId;
 const chainId = fromChainId;
 const owner = "YOUR_WALLET_ADDRESS";
 const tokenAddress = fromTokenAddress;
@@ -96,6 +97,15 @@ tx = await cli.buildTx(
         fromAddress,
         receiveAddress,
         numAction
+    }
+)
+```
+
+You can see the status of the transaction.
+``` js
+const txStatus = await cli.checkTx(
+    {
+        actionUuid: route.actions[numAction].uuid
     }
 )
 ```
