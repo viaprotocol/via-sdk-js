@@ -22,7 +22,6 @@ export interface IToken {
   color: string;
 }
 
-
 export interface IGetRoutesRequestParams {
   fromChainId: number;
   fromTokenAddress: string;
@@ -34,6 +33,32 @@ export interface IGetRoutesRequestParams {
   limit?: number;
   offset?: number;
   multiTx: boolean;
+}
+
+export interface ICheckTxStatusRequest {
+  actionUuid: string;
+}
+
+enum ITxStatus {
+  success = 'success',
+  user_tx_failed = 'user_tx_failed',
+  pending = 'pending',
+  to_be_started = 'to_be_started',
+  recieve_tx_not_found = 'recieve_tx_not_found',
+  null = 'null'
+}
+
+export interface ITxStatusData {
+  started: string;
+  finished: null | string;
+  txHash: null | string;
+  actualAmount: null | string;
+}
+
+export interface ITxStatusResponse {
+  event: ITxStatus;
+  data: null | ITxStatusData;
+  retry: null | number;
 }
 
 export interface IGetAllowanceStatus {
@@ -76,19 +101,16 @@ export interface IActionFeeInfo {
   gasActionApproveUnits: bigint;
 }
 
-
 export interface IAdditionalProviderFee {
   amount: bigint;
   token: IToken;
 }
-
 
 export interface IActionStepTool {
   name: string;
   logoURI: string;
   estimatedTime: number;
 }
-
 
 export interface IActionStep {
   type: string;
@@ -112,7 +134,6 @@ export interface IRouteAction {
   additionalProviderFee?: IAdditionalProviderFee;
   allowanceValue?: string;
 }
-
 
 export interface IRoute {
   routeId: string;
