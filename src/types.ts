@@ -40,19 +40,19 @@ export interface ICheckTxStatusRequest {
 }
 
 enum ITxStatus {
-  success = "success",
-  user_tx_failed = "user_tx_failed",
-  pending = "pending",
-  to_be_started = "to_be_started",
-  recieve_tx_not_found = "recieve_tx_not_found",
-  null = "null"
+  success = 'success',
+  user_tx_failed = 'user_tx_failed',
+  pending = 'pending',
+  to_be_started = 'to_be_started',
+  recieve_tx_not_found = 'recieve_tx_not_found',
+  null = 'null'
 }
 
 export interface ITxStatusData {
-  started: string
-  finished: null | string
-  txHash: null | string
-  actualAmount: null | string
+  started: string;
+  finished: null | string;
+  txHash: null | string;
+  actualAmount: null | string;
 }
 
 export interface ITxStatusResponse {
