@@ -11,6 +11,7 @@ Our API allows you to find the best route for moving funds between chains!
 |check allowance|Allowance to check whether it's needed or not to approve|getAllowanceStatus|
 |build approval transaction|The transaction that approves the VIA contract to spend your token|buildApprovalTx|
 |build transaction|The transaction that will perform a swap/bridge according to the route|buildTx|
+|check transaction|Check the status of the transaction|checkTx|
 
 
 ### Installing
@@ -55,8 +56,23 @@ const routes = await Promise.allSettled(
     params.map(i => cli.getRoutes(i))
 );
 ```
+Request parameters description
+|Parameter|Description|
+|--|--|
+|fromChainId|Source chain id|
+|fromTokenAddress|Source token address|
+|fromAmount|Amount|
+|toChainId|Target chain id|
+|toTokenAddress|Target token address|
+|fromAddress|Sender address|
+|multiTx|whether to return routes with multiple user transactions|
+|offset|Pagination offset|
+|limit|Pagination limit|
+
+Pagination is needed because the request time for a specific page is faster than for all pages at once
 
 Get allowance status
+
 You must approve the contract to spend your token.
 You can get route_id from the route you like received above in the code snippet.
 
@@ -109,3 +125,13 @@ const txStatus = await cli.checkTx(
     }
 )
 ```
+
+Response parameters description
+|Parameter|Description|
+|--|--|
+|retry|Time to retry in ms|
+|event|Status of the transaction|
+|data.started|Started time of the transaction on source chain|
+|data.finished|Finished time of the transaction on source chain|
+|data.txHash|Hash of the destination transaction|
+|data.actualAmount|Received amount|

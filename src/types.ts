@@ -51,14 +51,14 @@ enum ITxStatus {
 export interface ITxStatusData {
   started: string;
   finished: null | string;
-  txHash: null | string;
-  actualAmount: null | string;
+  txHash: null | string; // txHash received
+  actualAmount: null | string; // amount received
 }
 
 export interface ITxStatusResponse {
   event: ITxStatus;
   data: null | ITxStatusData;
-  retry: null | number;
+  retry: null | number; // retry after in ms
 }
 
 export interface IGetAllowanceStatus {
