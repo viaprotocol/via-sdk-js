@@ -90,6 +90,7 @@ export interface IGetRoutesResponse {
 export interface IFee {
   feeUsd: null | number;
   gas: null | number;
+  strGas: null | string;
   gasFeeUsd: null | number;
   slippagePerc: null | number;
   time: null | string;
@@ -98,7 +99,9 @@ export interface IFee {
 
 export interface IActionFeeInfo {
   gasActionUnits: bigint;
+  strGasActionUnits: string;
   gasActionApproveUnits: bigint;
+  strGasActionApproveUnits: string;
 }
 
 export interface IAdditionalProviderFee {
