@@ -1,8 +1,11 @@
 {
   "name": "@viaprotocol/router-sdk",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "dependencies": {
-    "axios": "^0.26.1"
+    "@types/ws": "^8.5.3",
+    "axios": "^0.26.1",
+    "isomorphic-ws": "^5.0.0",
+    "ws": "^8.8.0"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

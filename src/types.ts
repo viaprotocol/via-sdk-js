@@ -28,8 +28,8 @@ export interface IGetRoutesRequestParams {
   fromAmount: number;
   toChainId: number;
   toTokenAddress: string;
-  fromAddress?: string;  // sender user address
-  toAddress?: string;  // recipient user address
+  fromAddress?: string; // sender user address
+  toAddress?: string; // recipient user address
   limit?: number;
   offset?: number;
   multiTx: boolean;
@@ -39,13 +39,18 @@ export interface ICheckTxStatusRequest {
   actionUuid: string;
 }
 
+export interface IRouteFetchStatus {
+  finished: number;
+  all: number;
+}
+
 enum ITxStatus {
   success = 'success',
   user_tx_failed = 'user_tx_failed',
   pending = 'pending',
   to_be_started = 'to_be_started',
   recieve_tx_not_found = 'recieve_tx_not_found',
-  null = 'null'
+  null = 'null',
 }
 
 export interface ITxStatusData {
@@ -162,19 +167,19 @@ export interface IRoute {
 }
 
 export interface IAllowance {
-  value: string
-  tokenAddress: string
+  value: string;
+  tokenAddress: string;
 }
 
 export interface IApprovalTx {
-  from: string
-  data: string
-  to: string
+  from: string;
+  data: string;
+  to: string;
 }
 
 export interface IBuildTxResponse {
-  to: string
-  data: string
-  value: number
-  gas: number
+  to: string;
+  data: string;
+  value: number;
+  gas: number;
 }
