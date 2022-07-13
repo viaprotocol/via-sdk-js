@@ -1,6 +1,6 @@
 {
   "name": "@viaprotocol/router-sdk",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "dependencies": {
     "@types/ws": "^8.5.3",
     "axios": "^0.26.1",
