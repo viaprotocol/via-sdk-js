@@ -130,7 +130,7 @@ await cli.startRoute(
 )
 ```
 
-And start action
+And start action (you can start from the second action because startRoute also handles first action)
 
 ``` js
 await cli.startAction(
