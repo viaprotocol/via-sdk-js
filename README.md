@@ -117,6 +117,30 @@ tx = await cli.buildTx(
 )
 ```
 
+If you want to know the status of the transaction, then you need to tell us that you started it
+
+``` js
+await cli.startRoute(
+    {
+        fromAddress: fromAddress,
+        toAddress: receiveAddress,
+        routeId: route.routeId,
+        txHash: txHash
+    }
+)
+```
+
+And start action (you can start from the second action because startRoute also handles first action)
+
+``` js
+await cli.startAction(
+    {
+        actionUuid: route.actions[numAction].uuid,
+        initialTxHash: actionTxHash
+    }
+)
+```
+
 You can see the status of the transaction.
 ``` js
 const txStatus = await cli.checkTx(

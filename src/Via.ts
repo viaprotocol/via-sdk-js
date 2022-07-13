@@ -13,6 +13,9 @@ import {
   IGetRoutesResponse,
   ICheckTxStatusRequest,
   ITxStatusResponse,
+  IStartRoute,
+  IStartRouteResponse,
+  IStartAction,
 } from './types';
 
 class Via {
@@ -73,6 +76,31 @@ class Via {
     try {
       const res = await this.httpCli.get('/api/v2/send/build-tx', { params: {apiKey: this.apiKey, ...params} });
       return res.data;
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        throw new ViaError(e.response?.status, e.response?.data?.message);
+      } else {
+        throw e;
+      }
+    }
+  }
+
+  async startRoute(params: IStartRoute): Promise<IStartRouteResponse> {
+    try {
+      const res = await this.httpCli.get('/api/v1/start-route', { params: {apiKey: this.apiKey, ...params} });
+      return res.data;
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        throw new ViaError(e.response?.status, e.response?.data?.message);
+      } else {
+        throw e;
+      }
+    }
+  }
+
+  async startAction(params: IStartAction): Promise<void> {
+    try {
+      const res = await this.httpCli.get('/api/v1/start-action', { params: {apiKey: this.apiKey, ...params} });
     } catch (e) {
       if (axios.isAxiosError(e)) {
         throw new ViaError(e.response?.status, e.response?.data?.message);

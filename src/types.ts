@@ -55,6 +55,23 @@ export interface ITxStatusData {
   actualAmount: null | string; // amount received
 }
 
+export interface IStartAction {
+  actionUuid: string;
+  initialTxHash: string;
+}
+
+export interface IStartRoute {
+  fromAddress: string;
+  toAddress: string;
+  routeId: string;
+  txHash: string
+}
+
+export interface IStartRouteResponse {
+  routeUuid: string;
+  actionUuids: string[];
+}
+
 export interface ITxStatusResponse {
   event: ITxStatus;
   data: null | ITxStatusData;
