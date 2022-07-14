@@ -198,3 +198,51 @@ Response parameters description
 |data.finished|Finished time of the transaction on source chain|
 |data.txHash|Hash of the destination transaction|
 |data.actualAmount|Received amount|
+
+
+### Multi-tx
+
+With via.exchange it is possible to execute routes in several steps. This will help expand the number of available routes and, as a result, help you find the most profitable routes!
+
+
+``` js
+const pagesNum = await cli.routesPages(); // cache me!
+const baseParams = {
+    fromChainId: 1,
+    fromTokenAddress: '0x0000000000000000000000000000000000000000',
+    fromAmount: Math.pow(10, 18),
+    toChainId: 56,
+    toTokenAddress: '0x0000000000000000000000000000000000000000',
+    fromAddress: '0x856cc59aaE47997a1C8D5472Fc8dfef27821235d', // might be null
+    multiTx: true, // !!
+    limit: 1,
+};
+const params = [...Array(pagesNum)].map(
+    (_, i) => ({
+        ...baseParams,
+        offset: i+1
+    })
+);
+
+const routes = await Promise.allSettled(
+    params.map(i => cli.getRoutes(i))
+);
+```
+
+Now all you need is to sequentially execute transactions for different numAction
+
+``` js
+const actionCount = firstNonEmptyPage.routes[0].length;
+
+for (let numAction = 0; i < specified_len; i++) {
+    tx = await cli.buildTx(
+        {
+            routeId,
+            fromAddress,
+            receiveAddress,
+            numAction
+        }
+    );
+}  
+
+```
