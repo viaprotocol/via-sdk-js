@@ -1,3 +1,7 @@
+<p align="center"><a href="https://via.exchange" target="_blank"><img alt="Via Protocol is the most advanced cross-chain aggregation protocol" src="https://user-images.githubusercontent.com/55061526/181878538-f5efdb1b-e025-4f6b-96ce-596771c61cf7.png" width="100%">
+</a>
+</p>
+
 # VIA SDK typescript
 
 A small blazing fast wrapper over the VIA Router API for on-chain and cross-chain swaps.
