@@ -1,4 +1,4 @@
-<p align="center"><a href="https://via.exchange" target="_blank"><img alt="Via Protocol is the most advanced cross-chain aggregation protocol" src="https://user-images.githubusercontent.com/55061526/181878647-65feff84-71b0-4c95-84df-4cb110c1d283.png" width="100%">
+<p align="center"><a href="https://via.exchange" target="_blank"><img alt="Via Protocol is the most advanced cross-chain aggregation protocol" src="https://user-images.githubusercontent.com/55061526/181879914-47da0185-6143-4877-9d63-0920de60555b.png" width="100%">
 </a>
 </p>
 
