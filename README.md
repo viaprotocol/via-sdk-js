@@ -31,7 +31,9 @@ const DEFAULT_API_KEY = 'e3db93a3-ae1c-41e5-8229-b8c1ecef5583';
 const cli = new Via({apiKey: DEFAULT_API_KEY, url: 'https://router-api.via.exchange', timeout: 30000});
 ```
 
-Get the best routes.
+> ⚠️ Dafault API key has 1 RPS rate limit per IP. [Contact us](mailto:mkorolev@via.exchange) if you need your personal API key with much higher limits. 
+
+**Get the best routes**
 
 ``` js
 const pagesNum = await cli.routesPages(); // cache me!
@@ -71,7 +73,7 @@ Request parameters description
 
 Pagination is needed because the request time for a specific page is faster than for all pages at once
 
-Get allowance status
+**Get allowance status**
 
 You must approve the contract to spend your token.
 You can get route_id from the route you like received above in the code snippet.
@@ -104,7 +106,7 @@ tx = await cli.buildApprovalTx(
 Now you can build the transaction that will perform a crosschain swap according to the route.
 
 ``` js
-# amount out minimal, you can get it from get_routes as to_token_amount
+// amount out minimal, you can get it from get_routes as to_token_amount
 output = firstNonEmptyPage.routes[0].toTokenAmount
 
 tx = await cli.buildTx(
