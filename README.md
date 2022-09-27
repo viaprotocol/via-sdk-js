@@ -77,7 +77,7 @@ Request parameters description
 
 Pagination is needed because the request time for a specific page is faster than for all pages at once
 
-####Get allowance status
+#### Get allowance status
 
 You must approve the contract to spend your token.
 You can get route_id from the route you like received above in the code snippet.
