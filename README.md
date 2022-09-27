@@ -37,7 +37,7 @@ const cli = new Via({apiKey: DEFAULT_API_KEY, url: 'https://router-api.via.excha
 
 > ⚠️ Dafault API key has 1 RPS rate limit per IP. [Contact us](mailto:mbelyaev@via.exchange) if you need your personal API key with much higher limits.
 
-####Get the best routes
+#### Get the best routes
 
 ``` js
 const pagesNum = await cli.routesPages(); // cache me!
@@ -147,7 +147,7 @@ await cli.startAction(
 )
 ```
 
-####You can see the status of the transaction.
+#### You can see the status of the transaction.
 ``` js
 const txStatus = await cli.checkTx(
     {
@@ -156,7 +156,7 @@ const txStatus = await cli.checkTx(
 )
 ```
 
-####You can use websocket
+#### You can use websocket
 ``` js
 const v = new Via({apiKey: DEFAULT_API_KEY});
 const wsProvider = v.getRoutesViaWs({
