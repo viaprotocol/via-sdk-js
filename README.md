@@ -18,7 +18,7 @@ Our API allows you to find the best route for moving funds between chains!
 |check transaction|Check the status of the transaction|checkTx|
 
 
-### Installing
+### Installation
 ```
 npm i @viaprotocol/router-sdk
 ```
@@ -35,7 +35,7 @@ const DEFAULT_API_KEY = 'e3db93a3-ae1c-41e5-8229-b8c1ecef5583';
 const cli = new Via({apiKey: DEFAULT_API_KEY, url: 'https://router-api.via.exchange', timeout: 30000});
 ```
 
-> ⚠️ Dafault API key has 1 RPS rate limit per IP. [Contact us](mailto:mbelyaev@via.exchange) if you need your personal API key with much higher limits.
+> ⚠️ Default API key has 1 RPS rate limit per IP. [Contact us](mailto:mbelyaev@via.exchange) if you need your personal API key with much higher limits.
 
 #### Get the best routes
 
@@ -147,7 +147,7 @@ await cli.startAction(
 )
 ```
 
-#### You can see the status of the transaction.
+#### You can see the status of the transaction
 ``` js
 const txStatus = await cli.checkTx(
     {
