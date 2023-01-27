@@ -115,6 +115,7 @@ output = firstNonEmptyPage.routes[0].toTokenAmount
 
 tx = await cli.buildTx(
     {
+        owner,
         routeId,
         fromAddress,
         receiveAddress,
